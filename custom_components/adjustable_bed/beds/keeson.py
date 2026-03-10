@@ -349,12 +349,16 @@ class KeesonController(BedController):
         BetterLiving/CB1322: Slots 1-2 (from APK analysis)
         BaseI4/I5: Slot 3 only (from APK analysis)
         Ergomotion: 4 slots (needs verification)
-        Purple: 2 slots. Slot 2 is mapped to the standard slot 4
+        Purple: 2 slots for premium base, 3 slot for plus. Slot 1 is mapped to the standard slot 4
         """
         if self._betterliving_presets or self._cb1322_presets:
             return 2  # BetterLiving and CB1322 both have Memory 1 and Memory 2
-        if self._variant in ["ksbt",'purple']:
+        if self._variant == "ksbt":
             return 2  # Memory 1 (M button) and Memory 2 (TV button)
+        elif self._variant == "purple" and self._coordinator.has_massage:
+            return 3  # Purple Premium Plus has 3
+        elif self._variant == "purple" and not self._coordinator.has_massage:
+            return 2  # Purple Premium has 2
         elif self._variant == "ergomotion":
             return 4  # Ergomotion may support all 4
         else:
