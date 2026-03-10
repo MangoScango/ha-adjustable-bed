@@ -1,6 +1,6 @@
 # Keeson
 
-**Status:** ✅ Tested
+**Status:** ✅ Tested ❓ Needs testing
 
 **Credit:** Reverse engineering by [kristofferR](https://github.com/kristofferR/ha-adjustable-bed), [alanbixby](https://github.com/alanbixby) and [Richard Hopton](https://github.com/richardhopton/smartbed-mqtt)
 
@@ -46,12 +46,12 @@ Brands using Keeson/Ergomotion actuators:
 |---------|-----------|------|------------|------|-------|------|--------|
 | Motor Control | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Position Feedback | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Memory Presets | ✅ (slots 3-4) | ✅ (slots 1-2) | ✅ (4 slots) | ✅ | ✅ | ✅ | ✅ (slots 1-2) |
+| Memory Presets | ✅ (slots 3-4) | ✅ (slots 1-2) | ✅ (4 slots) | ✅ | ✅ | ✅ | ✅ |
 | TV Preset | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | 
 | Anti-Snore Preset | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Lounge Preset | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ |
-| Massage | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Safety Lights | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Massage | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❓ |
+| Safety Lights | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❓ |
 | Zero-G | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Protocol Variants

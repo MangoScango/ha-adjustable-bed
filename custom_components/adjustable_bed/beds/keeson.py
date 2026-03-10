@@ -897,8 +897,8 @@ class KeesonController(BedController):
             else:
                 _LOGGER.warning(
                     "%s save memory %d not supported (valid: %s)",
-                    memory_num,
                     self._variant,
+                    memory_num,
                     sorted(commands.keys()),
                 )
             return
