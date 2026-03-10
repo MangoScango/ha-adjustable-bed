@@ -355,10 +355,8 @@ class KeesonController(BedController):
             return 2  # BetterLiving and CB1322 both have Memory 1 and Memory 2
         if self._variant == "ksbt":
             return 2  # Memory 1 (M button) and Memory 2 (TV button)
-        elif self._variant == "purple" and self._coordinator.has_massage:
-            return 3  # Purple Premium Plus has 3
         elif self._variant == "purple" and not self._coordinator.has_massage:
-            return 2  # Purple Premium has 2
+            return 2  # Purple Premium has 2. Plus model bed supports 3, but we don't know what path it uses
         elif self._variant == "ergomotion":
             return 4  # Ergomotion may support all 4
         else:
