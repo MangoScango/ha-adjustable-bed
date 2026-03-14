@@ -32,7 +32,7 @@ from ..const import (
     KEESON_VARIANT_ERGOMOTION,
     KEESON_VARIANT_OKIN,
     KEESON_VARIANT_SINO,
-    KEESON_VARIANT_PURPLE
+    KEESON_VARIANT_PURPLE,
 )
 from .base import BedController
 from .okin_protocol import int_to_bytes
@@ -323,18 +323,18 @@ class KeesonController(BedController):
 
     @property
     def supports_preset_lounge(self) -> bool:
-        """KSBT and Ergomotion have the Lounge preset; BaseI4/I5 does not, except for purple"""
-        return self._variant != "base"
+        """KSBT, Ergomotion, and Purple have the Lounge preset; BaseI4/I5 does not."""
+        return self._variant in {"ksbt", "ergomotion", KEESON_VARIANT_PURPLE}
 
     @property
     def supports_preset_tv(self) -> bool:
         """KSBT and Ergomotion have TV preset; BaseI4/I5/Purple does not."""
-        return self._variant not in ["base", KEESON_VARIANT_PURPLE]
+        return self._variant in {"ksbt", "ergomotion"}
 
     @property
     def supports_preset_anti_snore(self) -> bool:
         """KSBT, Ergomotion, and Purple have anti-snore preset; BaseI4/I5 does not."""
-        return self._variant != "base"
+        return self._variant in {"ksbt", "ergomotion", KEESON_VARIANT_PURPLE}
 
     @property
     def supports_memory_presets(self) -> bool:
@@ -375,7 +375,7 @@ class KeesonController(BedController):
         
         Purple Premium Smart Base lacks lighting; Purple Plus (with massage) has it.
         """
-        if self._variant == "purple":
+        if self._variant == KEESON_VARIANT_PURPLE:
             # Plus model has massage and lighting; Premium base has neither
             return self._coordinator.has_massage
         return True
@@ -919,9 +919,9 @@ class KeesonController(BedController):
             await self.write_command(self._build_command(KeesonCommands.PRESET_ZERO_G))
 
     async def preset_lounge(self) -> None:
-        """Go to lounge position (KSBT/Ergomotion 'M' button / Memory 1)."""
-        if self._variant == "base":
-            _LOGGER.warning("Lounge preset is not available on BaseI4/I5 beds")
+        """Go to lounge position (KSBT/Ergomotion/Purple 'M' button / Memory 1)."""
+        if self._variant not in {"ksbt", "ergomotion", KEESON_VARIANT_PURPLE}:
+            _LOGGER.warning("Lounge preset is not available on %s beds", self._variant)
             return
         await self.write_command(self._build_command(KeesonCommands.PRESET_LOUNGE))
 
@@ -933,9 +933,9 @@ class KeesonController(BedController):
         await self.write_command(self._build_command(KeesonCommands.PRESET_TV))
 
     async def preset_anti_snore(self) -> None:
-        """Go to anti-snore position (KSBT/Ergomotion only)."""
-        if self._variant == "base":
-            _LOGGER.warning("Anti-snore preset is not available on BaseI4/I5 beds")
+        """Go to anti-snore position (KSBT/Ergomotion/Purple only)."""
+        if self._variant not in {"ksbt", "ergomotion", KEESON_VARIANT_PURPLE}:
+            _LOGGER.warning("Anti-snore preset is not available on %s beds", self._variant)
             return
         await self.write_command(self._build_command(KeesonCommands.PRESET_ANTI_SNORE))
 
